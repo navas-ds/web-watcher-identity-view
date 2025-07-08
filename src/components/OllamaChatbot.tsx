@@ -63,7 +63,13 @@ export function OllamaChatbot() {
         },
         body: JSON.stringify({
           model: OLLAMA_MODEL,
-          messages: allMessages,
+          messages: [
+            {
+              role: "system",
+              content: "You are a helpful assistant. Please respond directly without showing your thinking process. Provide clear, concise answers without using <think> tags or explaining your reasoning step by step."
+            },
+            ...allMessages
+          ],
           stream: true,
         }),
         signal: abortControllerRef.current.signal,
